@@ -16,7 +16,7 @@ class Layer
     /**
      * Redirecting to another page
      */
-    public static function regirectTo(string $url): void
+    public static function redirectTo(string $url): void
     {
         if (Conf::getConfigValue('redirect/layer', 'real') === 'real') {
             header("Location: $url");
