@@ -18,7 +18,7 @@ class Layer
      */
     public static function regirectTo(string $url): void
     {
-        if (Conf::getConfigValue('redirect/layer', 'real')) {
+        if (Conf::getConfigValue('redirect/layer', 'real') === 'real') {
             header("Location: $url");
             exit(0);
         } else {
