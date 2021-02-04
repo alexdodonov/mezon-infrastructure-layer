@@ -25,7 +25,7 @@ class Layer
                 return self::$sessionWasStarted = session_start();
             }
         } else {
-            self::$sessionWasStarted = true;
+            return self::$sessionWasStarted = true;
         }
     }
 
