@@ -41,7 +41,9 @@ class Layer
     public static function startSession(): bool
     {
         if (Conf::getConfigValue('redirect/layer', 'real') === 'real') {
-            return self::$sessionWasStarted = session_start();
+            if (! self::$sessionWasStarted) {
+                return self::$sessionWasStarted = session_start();
+            }
         } else {
             self::$sessionWasStarted = true;
         }
