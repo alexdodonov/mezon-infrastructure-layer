@@ -21,7 +21,9 @@ class Layer
     public static function startSession(): bool
     {
         if (Conf::getConfigValue('session/layer', 'real') === 'real') {
-            if (! self::$sessionWasStarted) {
+            if (self::$sessionWasStarted) {
+                return true;
+            } else {
                 return self::$sessionWasStarted = session_start();
             }
         } else {

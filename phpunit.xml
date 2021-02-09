@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/8.4/phpunit.xsd"
+	backupGlobals="false" colors="true" bootstrap='./vendor/autoload.php'>
+	<php>
+		<ini name="error_reporting" value="-1" />
+	</php>
+
+	<testsuites>
+		<testsuite name="all">
+			<directory suffix="UnitTest.php">./Mezon/Transport/Tests</directory>
+		</testsuite>
+	</testsuites>
+
+	<filter>
+		<whitelist>
+			<directory>./</directory>
+			<exclude>
+				<directory suffix="Test.php">./</directory>
+				<directory>vendor</directory>
+			</exclude>
+		</whitelist>
+	</filter>
+
+	<logging>
+		<log type="coverage-html"
+			target="./tmp/coverage-phpunit.html"></log>
+		<log type="coverage-text" target="php://stdout"
+			showOnlySummary="true"></log>
+	</logging>
+	<groups>
+		<exclude>
+			<group>baseTests</group>
+		</exclude>
+	</groups>
+</phpunit>
