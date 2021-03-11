@@ -12,6 +12,8 @@ class Layer
      * @var boolean
      */
     public static $redirectWasPerformed = false;
+    
+    // TODO store redirection URL
 
     /**
      * Redirecting to another page
