@@ -13,13 +13,20 @@ class Layer
      */
     public static $redirectWasPerformed = false;
     
-    // TODO store redirection URL
+    /**
+     * Last redirection URL
+     * 
+     * @var string
+     */
+    public static $lastRedirectionUrl = '';
 
     /**
      * Redirecting to another page
      */
     public static function redirectTo(string $url): void
     {
+        self::$lastRedirectionUrl = $url;
+        
         if (Conf::getConfigValue('redirect/layer', 'real') === 'real') {
             header("Location: $url");
             exit(0);
