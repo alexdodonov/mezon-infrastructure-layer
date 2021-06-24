@@ -40,4 +40,18 @@ class Layer
     {
         return self::$sessionWasStarted;
     }
+
+    /**
+     * Method returns session's name
+     *
+     * @return string session's name
+     */
+    public static function sessionName(): string
+    {
+        if (Conf::getConfigValue('session/layer', 'real') === 'real') {
+            return session_name();
+        } else {
+            return 'session-name';
+        }
+    }
 }
