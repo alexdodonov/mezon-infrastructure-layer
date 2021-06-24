@@ -54,4 +54,39 @@ class Layer
             return 'session-name';
         }
     }
+
+    /**
+     * Method sets cookie
+     *
+     * @param string $name
+     *            cookie name
+     * @param string $value
+     *            cookie value
+     * @param int $expires
+     *            expires
+     * @param string $path
+     *            paht of the cookie
+     * @param string $domain
+     *            domain
+     * @param bool $secure
+     *            secure?
+     * @param bool $httponly
+     *            http only?
+     * @return bool true on success, false otherwise
+     */
+    public static function setCookie(
+        string $name,
+        string $value = "",
+        int $expires = 0,
+        string $path = "",
+        string $domain = "",
+        bool $secure = false,
+        bool $httponly = false): bool
+    {
+        if (Conf::getConfigValue('session/layer', 'real') === 'real') {
+            return setcookie($name, $value, $expires, $path, $domain, $secure, $httponly);
+        } else {
+            return true;
+        }
+    }
 }
