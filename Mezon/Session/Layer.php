@@ -89,4 +89,36 @@ class Layer
             return true;
         }
     }
+
+    /**
+     * Method setups session id
+     *
+     * @param ?string $id
+     *            id of the session
+     * @return string session's name
+     */
+    public static function sessionId(string $id = null): string
+    {
+        if (Conf::getConfigValue('session/layer', 'real') === 'real') {
+            return session_id($id);
+        } else {
+            return 'session-id';
+        }
+    }
+
+    /**
+     * Write session data and end session
+     *
+     * @return bool true on success or false on failure
+     */
+    public static function sessionWriteClose(): bool
+    {
+        if (Conf::getConfigValue('session/layer', 'real') === 'real') {
+            session_write_close();
+        } else {
+            return true;
+        }
+    }
+
+    // TODO make article for dev.to about this abstraction
 }
