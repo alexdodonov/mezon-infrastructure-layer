@@ -93,11 +93,11 @@ class Layer
     /**
      * Method setups session id
      *
-     * @param ?string $id
+     * @param string $id
      *            id of the session
      * @return string session's name
      */
-    public static function sessionId(string $id = null): string
+    public static function sessionId(string $id = ''): string
     {
         if (Conf::getConfigValue('session/layer', 'real') === 'real') {
             return session_id($id);
@@ -114,7 +114,7 @@ class Layer
     public static function sessionWriteClose(): bool
     {
         if (Conf::getConfigValue('session/layer', 'real') === 'real') {
-            session_write_close();
+            return session_write_close();
         } else {
             return true;
         }
