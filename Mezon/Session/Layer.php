@@ -113,6 +113,8 @@ class Layer
      */
     public static function sessionWriteClose(): bool
     {
+        self::$sessionWasStarted = false;
+
         if (Conf::getConfigValue('session/layer', 'real') === 'real') {
             return session_write_close();
         } else {
