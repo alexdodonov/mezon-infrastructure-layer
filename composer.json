@@ -33,6 +33,6 @@
 	},
 	"scripts": {
 		"test": "php ./vendor/phpunit/phpunit/phpunit",
-		"psalm": "php ./vendor/vimeo/psalm/psalm --show-info=true"
+		"psalm": "php ./vendor/vimeo/psalm/psalm --show-info=true --no-cache"
 	}
 }
