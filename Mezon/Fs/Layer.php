@@ -35,7 +35,9 @@ class Layer
     public static function filePutContents(string $path, string $data, int $flags = 0): int
     {
         if (Conf::getConfigValue('fs/layer', 'real') === 'real') {
+            // @codeCoverageIgnoreStart
             return file_put_contents($path, $data, $flags);
+            // @codeCoverageIgnoreEnd
         } else {
             self::$filePaths[] = $path;
             self::$fileData[] = $data;
