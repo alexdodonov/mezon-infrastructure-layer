@@ -6,11 +6,13 @@ use Mezon\Conf\Conf;
 class Layer
 {
 
+    // TODO collapse $filePaths, $fileData, $fileFlags in one array like $createdDirectories, this
+    // will make class interface more short and simple - one public method instead of 3 public fields
     /**
      * Paths to the saved filed.
      * Filled only if the Conf::getConfigValue('fs/layer', 'real') !== 'real'
      *
-     * @var array
+     * @var string[]
      */
     public static $filePaths = [];
 
@@ -18,9 +20,16 @@ class Layer
      * Saved data.
      * Filled only if the Conf::getConfigValue('fs/layer', 'real') !== 'real'
      *
-     * @var array
+     * @var string[]
      */
     public static $fileData = [];
+
+    /**
+     * Flags
+     *
+     * @var int[]
+     */
+    public static $fileFlags = [];
 
     /**
      * Saving data on the disc
@@ -42,6 +51,7 @@ class Layer
         } else {
             self::$filePaths[] = $path;
             self::$fileData[] = $data;
+            self::$fileFlags[] = $flags;
 
             return 1;
         }
@@ -75,7 +85,7 @@ class Layer
         if (isset(self::$createdDirectories[$i])) {
             return self::$createdDirectories[$i];
         } else {
-            throw (new \Exception('Element with key ' . $i . 'was not found', - 1));
+            throw (new \Exception('Element with key ' . $i . ' was not found', - 1));
         }
     }
 
@@ -104,6 +114,62 @@ class Layer
             ];
 
             return true;
+        }
+    }
+
+    /**
+     * Returns for fileExists method
+     *
+     * @var bool[]
+     */
+    public static $fileExisting = [];
+
+    /**
+     * Checking if the file exists
+     *
+     * @param string $filePath
+     *            path to the checking file
+     * @return bool true if the file exists, false otherwise
+     */
+    public static function fileExists(string $filePath): bool
+    {
+        if (Conf::getConfigValue('fs/layer', 'real') === 'real') {
+            // @codeCoverageIgnoreStart
+            return file_exists($filePath);
+            // @codeCoverageIgnoreEnd
+        } else {
+            self::$fileExisting = array_reverse(self::$fileExisting);
+
+            $result = array_pop(self::$fileExisting);
+
+            self::$fileExisting = array_reverse(self::$fileExisting);
+
+            return $result;
+        }
+    }
+
+    /**
+     * Method returns file content
+     *
+     * @var array<string, string|bool>
+     */
+    public static $fileGetContentsData = [];
+
+    /**
+     * Reading file from disc
+     *
+     * @param string $filePath
+     *            path to the file to be read
+     * @return string|boolean read data or false in case of error
+     */
+    public static function fileGetContents(string $filePath)
+    {
+        if (Conf::getConfigValue('fs/layer', 'real') === 'real') {
+            // @codeCoverageIgnoreStart
+            return @file_get_contents($filePath);
+            // @codeCoverageIgnoreEnd
+        } else {
+            return self::$fileGetContentsData[$filePath];
         }
     }
 }

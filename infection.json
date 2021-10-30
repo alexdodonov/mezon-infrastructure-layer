@@ -17,6 +17,21 @@
 		"perMutator": "\/tmp\/per-mutator-log.txt"
 	},
 	"mutators": {
-		"@default": true
+		"@default": true,
+		"FunctionCallRemoval": {
+			"ignore": [
+				"Mezon\\Redirect\\Layer::redirectTo::32"
+			]
+		},
+		"DecrementInteger": {
+			"ignore": [
+				"Mezon\\Redirect\\Layer::redirectTo::33"
+			]
+		},
+		"IncrementInteger": {
+			"ignore": [
+				"Mezon\\Redirect\\Layer::redirectTo::33"
+			]
+		}
 	}
 }

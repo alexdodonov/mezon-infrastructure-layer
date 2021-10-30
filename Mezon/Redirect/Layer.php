@@ -28,8 +28,10 @@ class Layer
         self::$lastRedirectionUrl = $url;
         
         if (Conf::getConfigValue('redirect/layer', 'real') === 'real') {
+            // @codeCoverageIgnoreStart
             header("Location: $url");
             exit(0);
+            // @codeCoverageIgnoreEnd
         } else {
             self::$redirectWasPerformed = true;
         }

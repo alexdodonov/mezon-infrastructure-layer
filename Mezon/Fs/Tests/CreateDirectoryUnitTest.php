@@ -1,5 +1,5 @@
 <?php
-namespace Mezon\Conf\Tests;
+namespace Mezon\Fs\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Mezon\Conf\Conf;
@@ -13,14 +13,21 @@ class CreateDirectoryUnitTest extends TestCase
 {
 
     /**
+     *
+     * {@inheritdoc}
+     * @see TestCase::setUp()
+     */
+    protected function setUp(): void
+    {
+        Layer::clearCreatedDirectoriesInfo();
+        Conf::setConfigValue('fs/layer', 'mock');
+    }
+
+    /**
      * Testing method createDirectory
      */
     public function testCreateDirectory(): void
     {
-        // setup
-        Layer::clearCreatedDirectoriesInfo();
-        Conf::setConfigValue('fs/layer', 'mock');
-
         // test body
         $result = Layer::createDirectory('/path', 0666, false);
 
@@ -36,10 +43,6 @@ class CreateDirectoryUnitTest extends TestCase
      */
     public function testCreateDirectoryWithDefaultParameters(): void
     {
-        // setup
-        Layer::clearCreatedDirectoriesInfo();
-        Conf::setConfigValue('fs/layer', 'mock');
-
         // test body
         $result = Layer::createDirectory('/path');
 
