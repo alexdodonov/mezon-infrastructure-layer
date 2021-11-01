@@ -32,6 +32,14 @@ class Layer
     public static $fileFlags = [];
 
     /**
+     * Clearing data
+     */
+    public static function clearFilePutContentsData(): void
+    {
+        self::$filePaths = self::$fileData = self::$fileFlags = [];
+    }
+
+    /**
      * Saving data on the disc
      *
      * @param string $path

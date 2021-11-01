@@ -19,7 +19,7 @@ class FilePutContentsUnitTest extends TestCase
      */
     protected function setUp(): void
     {
-        Layer::$filePaths = Layer::$fileData = Layer::$fileFlags = [];
+        Layer::clearFilePutContentsData();
         Layer::clearCreatedDirectoriesInfo();
         Conf::setConfigValue('fs/layer', 'mock');
     }
