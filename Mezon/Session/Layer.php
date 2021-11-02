@@ -21,11 +21,13 @@ class Layer
     public static function startSession(): bool
     {
         if (Conf::getConfigValue('session/layer', 'real') === 'real') {
+            // @codeCoverageIgnoreStart
             if (self::$sessionWasStarted) {
                 return true;
             } else {
                 return self::$sessionWasStarted = session_start();
             }
+            // @codeCoverageIgnoreEnd
         } else {
             return self::$sessionWasStarted = true;
         }
@@ -49,7 +51,9 @@ class Layer
     public static function sessionName(): string
     {
         if (Conf::getConfigValue('session/layer', 'real') === 'real') {
+            // @codeCoverageIgnoreStart
             return session_name();
+            // @codeCoverageIgnoreEnd
         } else {
             return 'session-name';
         }
@@ -84,7 +88,9 @@ class Layer
         bool $httponly = false): bool
     {
         if (Conf::getConfigValue('session/layer', 'real') === 'real') {
+            // @codeCoverageIgnoreStart
             return setcookie($name, $value, $expires, $path, $domain, $secure, $httponly);
+            // @codeCoverageIgnoreEnd
         } else {
             return true;
         }
@@ -100,7 +106,9 @@ class Layer
     public static function sessionId(string $id = ''): string
     {
         if (Conf::getConfigValue('session/layer', 'real') === 'real') {
+            // @codeCoverageIgnoreStart
             return session_id($id);
+            // @codeCoverageIgnoreEnd
         } else {
             return 'session-id';
         }
@@ -116,7 +124,9 @@ class Layer
         self::$sessionWasStarted = false;
 
         if (Conf::getConfigValue('session/layer', 'real') === 'real') {
+            // @codeCoverageIgnoreStart
             return session_write_close();
+            // @codeCoverageIgnoreEnd
         } else {
             return true;
         }
