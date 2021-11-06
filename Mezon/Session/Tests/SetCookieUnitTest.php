@@ -20,6 +20,7 @@ class SetCookieUnitTest extends TestCase
     protected function setUp(): void
     {
         Conf::setConfigValue('session/layer', 'mock');
+        Layer::$cookies = [];
     }
 
     /**
@@ -32,5 +33,23 @@ class SetCookieUnitTest extends TestCase
 
         // assertions
         $this->assertTrue($result);
+    }
+
+    /**
+     * Testing method setCookie with default parameters
+     */
+    public function testSetCookieWithDefaultParameters(): void
+    {
+        // test body
+        Layer::setCookie('default-cookie');
+
+        // assertions
+        $this->assertEquals('default-cookie', Layer::$cookies[0]['name']);
+        $this->assertEquals('', Layer::$cookies[0]['value']);
+        $this->assertEquals(0, Layer::$cookies[0]['expires']);
+        $this->assertEquals('', Layer::$cookies[0]['path']);
+        $this->assertEquals('', Layer::$cookies[0]['domain']);
+        $this->assertEquals(false, Layer::$cookies[0]['secure']);
+        $this->assertEquals(false, Layer::$cookies[0]['httponly']);
     }
 }

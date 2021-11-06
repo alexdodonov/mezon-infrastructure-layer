@@ -21,10 +21,10 @@ class Layer
     public static function startSession(): bool
     {
         if (Conf::getConfigValue('session/layer', 'real') === 'real') {
-            // @codeCoverageIgnoreStart
             if (self::$sessionWasStarted) {
                 return true;
             } else {
+                // @codeCoverageIgnoreStart
                 return self::$sessionWasStarted = session_start();
             }
             // @codeCoverageIgnoreEnd
@@ -60,6 +60,13 @@ class Layer
     }
 
     /**
+     * Cookies
+     *
+     * @var list<array{name: string, value: string, expires: int, path: string, domain: string, secure: bool, httponly: bool}>
+     */
+    public static $cookies = [];
+
+    /**
      * Method sets cookie
      *
      * @param string $name
@@ -92,6 +99,15 @@ class Layer
             return setcookie($name, $value, $expires, $path, $domain, $secure, $httponly);
             // @codeCoverageIgnoreEnd
         } else {
+            self::$cookies[] = [
+                'name' => $name,
+                'value' => $value,
+                'expires' => $expires,
+                'path' => $path,
+                'domain' => $domain,
+                'secure' => $secure,
+                'httponly' => $httponly
+            ];
             return true;
         }
     }
