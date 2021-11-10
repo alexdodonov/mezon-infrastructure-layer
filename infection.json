@@ -20,7 +20,12 @@
 		"@default": true,
 		"FunctionCallRemoval": {
 			"ignore": [
-				"Mezon\\Redirect\\Layer::redirectTo::32"
+				"Mezon\\Redirect\\Layer::redirectTo::32",
+				"Mezon\\Gd\\Layer::imageJpeg::61",
+				"Mezon\\Gd\\Layer::imagePng::83",
+				"Mezon\\Gd\\Layer::imageGif::105",
+				"Mezon\\Gd\\Layer::imageBmp::127",
+				"Mezon\\Gd\\Layer::imageWebp::149"
 			]
 		},
 		"DecrementInteger": {

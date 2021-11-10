@@ -20,7 +20,7 @@ class Layer
      */
     public static function startSession(): bool
     {
-        if (Conf::getConfigValue('session/layer', 'real') === 'real') {
+        if (Conf::getConfigValueAsString('session/layer', 'real') === 'real') {
             if (self::$sessionWasStarted) {
                 return true;
             } else {
@@ -50,7 +50,7 @@ class Layer
      */
     public static function sessionName(): string
     {
-        if (Conf::getConfigValue('session/layer', 'real') === 'real') {
+        if (Conf::getConfigValueAsString('session/layer', 'real') === 'real') {
             // @codeCoverageIgnoreStart
             return session_name();
             // @codeCoverageIgnoreEnd
@@ -94,7 +94,7 @@ class Layer
         bool $secure = false,
         bool $httponly = false): bool
     {
-        if (Conf::getConfigValue('session/layer', 'real') === 'real') {
+        if (Conf::getConfigValueAsString('session/layer', 'real') === 'real') {
             // @codeCoverageIgnoreStart
             return setcookie($name, $value, $expires, $path, $domain, $secure, $httponly);
             // @codeCoverageIgnoreEnd
@@ -121,7 +121,7 @@ class Layer
      */
     public static function sessionId(string $id = ''): string
     {
-        if (Conf::getConfigValue('session/layer', 'real') === 'real') {
+        if (Conf::getConfigValueAsString('session/layer', 'real') === 'real') {
             // @codeCoverageIgnoreStart
             return session_id($id);
             // @codeCoverageIgnoreEnd
@@ -139,7 +139,7 @@ class Layer
     {
         self::$sessionWasStarted = false;
 
-        if (Conf::getConfigValue('session/layer', 'real') === 'real') {
+        if (Conf::getConfigValueAsString('session/layer', 'real') === 'real') {
             // @codeCoverageIgnoreStart
             return session_write_close();
             // @codeCoverageIgnoreEnd

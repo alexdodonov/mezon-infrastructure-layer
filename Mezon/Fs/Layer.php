@@ -10,7 +10,7 @@ class Layer
     // will make class interface more short and simple - one public method instead of 3 public fields
     /**
      * Paths to the saved filed.
-     * Filled only if the Conf::getConfigValue('fs/layer', 'real') !== 'real'
+     * Filled only if the Conf::getConfigValueAsString('fs/layer', 'real') !== 'real'
      *
      * @var string[]
      */
@@ -18,7 +18,7 @@ class Layer
 
     /**
      * Saved data.
-     * Filled only if the Conf::getConfigValue('fs/layer', 'real') !== 'real'
+     * Filled only if the Conf::getConfigValueAsString('fs/layer', 'real') !== 'real'
      *
      * @var string[]
      */
@@ -52,7 +52,7 @@ class Layer
      */
     public static function filePutContents(string $path, string $data, int $flags = 0): int
     {
-        if (Conf::getConfigValue('fs/layer', 'real') === 'real') {
+        if (Conf::getConfigValueAsString('fs/layer', 'real') === 'real') {
             // @codeCoverageIgnoreStart
             return file_put_contents($path, $data, $flags);
             // @codeCoverageIgnoreEnd
@@ -67,7 +67,7 @@ class Layer
 
     /**
      * List of the created directories.
-     * Filled only if the Conf::getConfigValue('fs/layer', 'real') !== 'real'
+     * Filled only if the Conf::getConfigValueAsString('fs/layer', 'real') !== 'real'
      *
      * @var array[]
      */
@@ -110,7 +110,7 @@ class Layer
      */
     public static function createDirectory(string $path, int $mode = 0777, bool $recursive = false): bool
     {
-        if (Conf::getConfigValue('fs/layer', 'real') === 'real') {
+        if (Conf::getConfigValueAsString('fs/layer', 'real') === 'real') {
             // @codeCoverageIgnoreStart
             return mkdir($path, $mode, $recursive);
             // @codeCoverageIgnoreEnd
@@ -141,7 +141,7 @@ class Layer
      */
     public static function fileExists(string $filePath): bool
     {
-        if (Conf::getConfigValue('fs/layer', 'real') === 'real') {
+        if (Conf::getConfigValueAsString('fs/layer', 'real') === 'real') {
             // @codeCoverageIgnoreStart
             return file_exists($filePath);
             // @codeCoverageIgnoreEnd
@@ -172,7 +172,7 @@ class Layer
      */
     public static function fileGetContents(string $filePath)
     {
-        if (Conf::getConfigValue('fs/layer', 'real') === 'real') {
+        if (Conf::getConfigValueAsString('fs/layer', 'real') === 'real') {
             // @codeCoverageIgnoreStart
             return @file_get_contents($filePath);
             // @codeCoverageIgnoreEnd
