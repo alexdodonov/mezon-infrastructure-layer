@@ -4,6 +4,7 @@ namespace Mezon\Gd\Tests;
 use PHPUnit\Framework\TestCase;
 use Mezon\Gd\Layer;
 use Mezon\Conf\Conf;
+use Mezon\Fs\InMemory;
 
 /**
  *
@@ -13,36 +14,95 @@ class GetImageSizeUnitTest extends TestCase
 {
 
     /**
-     * Testing method
+     *
+     * {@inheritdoc}
+     * @see TestCase::setUp()
      */
-    public function testGetImageSize(): void
+    protected function setUp(): void
+    {
+        InMemory::clearFs();
+    }
+
+    /**
+     * Testing data provider
+     *
+     * @return array testing data
+     */
+    public function getImageSizeDataProvider(): array
+    {
+        return [
+            // #0
+            [
+                'test.bmp',
+                'image/bmp'
+            ],
+            // #1
+            [
+                'test.gif',
+                'image/gif'
+            ],
+            // #2
+            [
+                'test.jpg',
+                'image/jpeg'
+            ],
+            // #3
+            [
+                'test.png',
+                'image/png'
+            ],
+            // #4
+            [
+                'test.webp',
+                'image/webp'
+            ]
+        ];
+    }
+
+    /**
+     * Testing method getImageSize with real brunch
+     *
+     * @param string $fileName
+     *            name of the loading file
+     * @param string $mime
+     *            mime type of the file
+     * @dataProvider getImageSizeDataProvider
+     */
+    public function testGetImageSize(string $fileName, string $mime): void
+    {
+        // setup
+        Conf::setConfigValue('gd/layer', 'real');
+
+        // test body
+        $result = Layer::getImageSize(__DIR__ . '/Data/' . $fileName);
+
+        // assertions
+        $this->assertEquals(32, $result[0]);
+        $this->assertEquals(32, $result[1]);
+        $this->assertEquals($mime, $result['mime']);
+    }
+
+    /**
+     * Testing method getImageSize with mock brunch
+     *
+     * @param string $fileName
+     *            name of the loading file
+     * @param string $mime
+     *            mime type of the file
+     * @dataProvider getImageSizeDataProvider
+     */
+    public function testGetImageSizeMock(string $fileName, string $mime): void
     {
         // setup
         Conf::setConfigValue('gd/layer', 'mock');
-        Layer::$imageSize = [
-            [
-                1,
-                2
-            ],
-            [
-                2,
-                3
-            ],
-            [
-                3,
-                4
-            ]
-        ];
+        InMemory::preloadFile(__DIR__ . '/Data/' . $fileName);
 
         // test body
-        $result1 = Layer::getImageSize('./file-path');
-        $result2 = Layer::getImageSize('./file-path');
+        $result = Layer::getImageSize(__DIR__ . '/Data/' . $fileName);
 
         // assertions
-        $this->assertEquals(1, $result1[0]);
-        $this->assertEquals(2, $result1[1]);
-
-        $this->assertEquals(2, $result2[0]);
-        $this->assertEquals(3, $result2[1]);
+        $this->assertEquals(32, $result[0]);
+        $this->assertEquals(32, $result[1]);
+        $this->assertEquals($mime, $result['mime']);
     }
 }

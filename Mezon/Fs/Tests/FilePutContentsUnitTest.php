@@ -4,6 +4,7 @@ namespace Mezon\Fs\Tests;
 use PHPUnit\Framework\TestCase;
 use Mezon\Conf\Conf;
 use Mezon\Fs\Layer;
+use Mezon\Fs\InMemory;
 
 /**
  *
@@ -19,9 +20,8 @@ class FilePutContentsUnitTest extends TestCase
      */
     protected function setUp(): void
     {
-        Layer::clearFilePutContentsData();
-        Layer::clearCreatedDirectoriesInfo();
         Conf::setConfigValue('fs/layer', 'mock');
+        InMemory::clearFs();
     }
 
     /**
@@ -30,13 +30,11 @@ class FilePutContentsUnitTest extends TestCase
     public function testFilePutContentsWithAllParameters(): void
     {
         // test body
-        $result = Layer::filePutContents('./path-a', 'data-a', 1);
+        Layer::filePutContents('./path-a', 'a', FILE_APPEND);
+        Layer::filePutContents('./path-a', 'b', FILE_APPEND);
 
         // assertions
-        $this->assertEquals(1, $result);
-        $this->assertEquals(Layer::$filePaths[0], './path-a');
-        $this->assertEquals(Layer::$fileData[0], 'data-a');
-        $this->assertEquals(Layer::$fileFlags[0], 1);
+        $this->assertEquals('ab', InMemory::fileGetContents('./path-a'));
     }
 
     /**
@@ -45,12 +43,10 @@ class FilePutContentsUnitTest extends TestCase
     public function testFilePutContentsWithDefaultParameters(): void
     {
         // test body
-        $result = Layer::filePutContents('./path-d', 'data-d');
+        Layer::filePutContents('./path-d', 'a');
+        Layer::filePutContents('./path-d', 'b');
 
         // assertions
-        $this->assertEquals(1, $result);
-        $this->assertEquals(Layer::$filePaths[0], './path-d');
-        $this->assertEquals(Layer::$fileData[0], 'data-d');
-        $this->assertEquals(Layer::$fileFlags[0], 0);
+        $this->assertEquals('b', InMemory::fileGetContents('./path-d'));
     }
 }

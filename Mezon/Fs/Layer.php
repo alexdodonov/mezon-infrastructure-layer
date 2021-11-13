@@ -3,46 +3,23 @@ namespace Mezon\Fs;
 
 use Mezon\Conf\Conf;
 
+/**
+ * Configuration routines
+ *
+ * @package InfrastructureLayer
+ * @subpackage Fs
+ * @author Dodonov A.A.
+ * @version v.1.0 (2021/11/13)
+ * @copyright Copyright (c) 2021, aeon.org
+ */
+
 class Layer
 {
-
-    // TODO collapse $filePaths, $fileData, $fileFlags in one array like $createdDirectories, this
-    // will make class interface more short and simple - one public method instead of 3 public fields
-    /**
-     * Paths to the saved filed.
-     * Filled only if the Conf::getConfigValueAsString('fs/layer', 'real') !== 'real'
-     *
-     * @var string[]
-     */
-    public static $filePaths = [];
-
-    /**
-     * Saved data.
-     * Filled only if the Conf::getConfigValueAsString('fs/layer', 'real') !== 'real'
-     *
-     * @var string[]
-     */
-    public static $fileData = [];
-
-    /**
-     * Flags
-     *
-     * @var int[]
-     */
-    public static $fileFlags = [];
-
-    /**
-     * Clearing data
-     */
-    public static function clearFilePutContentsData(): void
-    {
-        self::$filePaths = self::$fileData = self::$fileFlags = [];
-    }
 
     /**
      * Saving data on the disc
      *
-     * @param string $path
+     * @param string $filePath
      *            path to the file
      * @param string $data
      *            saving data
@@ -50,18 +27,14 @@ class Layer
      *            flags
      * @return int result
      */
-    public static function filePutContents(string $path, string $data, int $flags = 0): int
+    public static function filePutContents(string $filePath, string $data, int $flags = 0): int
     {
         if (Conf::getConfigValueAsString('fs/layer', 'real') === 'real') {
             // @codeCoverageIgnoreStart
-            return file_put_contents($path, $data, $flags);
+            return file_put_contents($filePath, $data, $flags);
             // @codeCoverageIgnoreEnd
         } else {
-            self::$filePaths[] = $path;
-            self::$fileData[] = $data;
-            self::$fileFlags[] = $flags;
-
-            return 1;
+            return InMemory::filePutContents($filePath, $data, $flags);
         }
     }
 
@@ -100,7 +73,7 @@ class Layer
     /**
      * Creating folders on the disc
      *
-     * @param string $path
+     * @param string $filePath
      *            path to the file
      * @param int $mode
      *            access setting to the creating directory
@@ -108,15 +81,15 @@ class Layer
      *            use recursive directories
      * @return bool true on success, false on error
      */
-    public static function createDirectory(string $path, int $mode = 0777, bool $recursive = false): bool
+    public static function createDirectory(string $filePath, int $mode = 0777, bool $recursive = false): bool
     {
         if (Conf::getConfigValueAsString('fs/layer', 'real') === 'real') {
             // @codeCoverageIgnoreStart
-            return mkdir($path, $mode, $recursive);
+            return mkdir($filePath, $mode, $recursive);
             // @codeCoverageIgnoreEnd
         } else {
             self::$createdDirectories[] = [
-                'path' => $path,
+                'path' => $filePath,
                 'mode' => $mode,
                 'recursive' => $recursive
             ];
@@ -157,13 +130,6 @@ class Layer
     }
 
     /**
-     * Method returns file content
-     *
-     * @var array<string, string|bool>
-     */
-    public static $fileGetContentsData = [];
-
-    /**
      * Reading file from disc
      *
      * @param string $filePath
@@ -177,7 +143,7 @@ class Layer
             return @file_get_contents($filePath);
             // @codeCoverageIgnoreEnd
         } else {
-            return self::$fileGetContentsData[$filePath];
+            return InMemory::fileGetContents($filePath);
         }
     }
 }

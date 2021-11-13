@@ -3,6 +3,16 @@ namespace Mezon\Session;
 
 use Mezon\Conf\Conf;
 
+/**
+ * Configuration routines
+ *
+ * @package InfrastructureLayer
+ * @subpackage Session
+ * @author Dodonov A.A.
+ * @version v.1.0 (2021/11/13)
+ * @copyright Copyright (c) 2021, aeon.org
+ */
+
 class Layer
 {
 

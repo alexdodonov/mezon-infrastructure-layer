@@ -4,6 +4,7 @@ namespace Mezon\Fs\Tests;
 use PHPUnit\Framework\TestCase;
 use Mezon\Conf\Conf;
 use Mezon\Fs\Layer;
+use Mezon\Fs\InMemory;
 
 /**
  *
@@ -19,10 +20,7 @@ class FileGetContentsUnitTest extends TestCase
     {
         // setup
         Conf::setConfigValue('fs/layer', 'mock');
-        Layer::$fileGetContentsData = [
-            'existing' => 'data',
-            'unexisting' => false
-        ];
+        InMemory::filePutContents('existing', 'data');
 
         // test body and assertions
         $this->assertEquals('data', Layer::fileGetContents('existing'));

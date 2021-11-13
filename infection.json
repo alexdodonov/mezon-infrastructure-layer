@@ -20,31 +20,22 @@
 		"@default": true,
 		"FunctionCallRemoval": {
 			"ignore": [
-				"Mezon\\Redirect\\Layer::redirectTo::32",
-				"Mezon\\Gd\\Layer::imageJpeg::61",
-				"Mezon\\Gd\\Layer::imagePng::83",
-				"Mezon\\Gd\\Layer::imageGif::105",
-				"Mezon\\Gd\\Layer::imageBmp::127",
-				"Mezon\\Gd\\Layer::imageWebp::149"
-			]
-		},
-		"FunctionCall": {
-			"ignore": [
-				"Mezon\\Gd\\Layer::imageCreateFromJpeg::176",
-				"Mezon\\Gd\\Layer::imageCreateFromPng::193",
-				"Mezon\\Gd\\Layer::imageCreateFromGif::210",
-				"Mezon\\Gd\\Layer::imageCreateFromBmp::227",
-				"Mezon\\Gd\\Layer::imageCreateFromWebp::244"
+				"Mezon\\Redirect\\Layer::redirectTo::42",
+				"Mezon\\Gd\\Layer::imageJpeg::59",
+				"Mezon\\Gd\\Layer::imagePng::81",
+				"Mezon\\Gd\\Layer::imageGif::103",
+				"Mezon\\Gd\\Layer::imageBmp::125",
+				"Mezon\\Gd\\Layer::imageWebp::147"
 			]
 		},
 		"DecrementInteger": {
 			"ignore": [
-				"Mezon\\Redirect\\Layer::redirectTo::33"
+				"Mezon\\Redirect\\Layer::redirectTo::43"
 			]
 		},
 		"IncrementInteger": {
 			"ignore": [
-				"Mezon\\Redirect\\Layer::redirectTo::33"
+				"Mezon\\Redirect\\Layer::redirectTo::43"
 			]
 		}
 	}
