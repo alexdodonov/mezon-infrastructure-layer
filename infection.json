@@ -28,6 +28,15 @@
 				"Mezon\\Gd\\Layer::imageWebp::149"
 			]
 		},
+		"FunctionCall": {
+			"ignore": [
+				"Mezon\\Gd\\Layer::imageCreateFromJpeg::176",
+				"Mezon\\Gd\\Layer::imageCreateFromPng::193",
+				"Mezon\\Gd\\Layer::imageCreateFromGif::210",
+				"Mezon\\Gd\\Layer::imageCreateFromBmp::227",
+				"Mezon\\Gd\\Layer::imageCreateFromWebp::244"
+			]
+		},
 		"DecrementInteger": {
 			"ignore": [
 				"Mezon\\Redirect\\Layer::redirectTo::33"

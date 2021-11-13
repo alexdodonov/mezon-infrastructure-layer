@@ -1,5 +1,5 @@
 <?php
-namespace Mezon\Gd\Tests;
+namespace Mezon\Gd\Tests\Image;
 
 use PHPUnit\Framework\TestCase;
 use Mezon\Conf\Conf;
@@ -9,7 +9,7 @@ use Mezon\Gd\Layer;
  *
  * @psalm-suppress PropertyNotSetInConstructor
  */
-class ImageGifUnitTest extends TestCase
+class JpegUnitTest extends TestCase
 {
 
     /**
@@ -24,22 +24,22 @@ class ImageGifUnitTest extends TestCase
     }
 
     /**
-     * Testing method imageGif
+     * Testing method imageJpeg
      */
-    public function testImageGif(): void
+    public function testImageJpeg(): void
     {
         // test body
-        $resource = imagecreatefromgif(__DIR__ . '/Data/test.gif');
-        Layer::imageGif($resource, './dst');
+        $resource = imagecreatefromjpeg(__DIR__ . '/../Data/test.jpg');
+        Layer::imageJpeg($resource, './dst');
 
         // assertions
 
-        $origin = imagecreatefromstring(file_get_contents(__DIR__ . '/Data/test.gif'));
+        $origin = imagecreatefromstring(file_get_contents(__DIR__ . '/../Data/test.jpg'));
         $stream = fopen('php://memory', 'r+');
-        imagegif($origin, $stream);
+        imagejpeg($origin, $stream);
         rewind($stream);
         $expected = stream_get_contents($stream);
 
-        $this->assertEquals($expected, Layer::$savedImages['./dst'], 'GIF files are not equal');
+        $this->assertEquals($expected, Layer::$savedImages['./dst'], 'JPEG files are not equal');
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Mezon\Gd\Tests;
+namespace Mezon\Gd\Tests\Image;
 
 use PHPUnit\Framework\TestCase;
 use Mezon\Conf\Conf;
@@ -9,7 +9,7 @@ use Mezon\Gd\Layer;
  *
  * @psalm-suppress PropertyNotSetInConstructor
  */
-class ImageBmpUnitTest extends TestCase
+class BmpUnitTest extends TestCase
 {
 
     /**
@@ -29,12 +29,12 @@ class ImageBmpUnitTest extends TestCase
     public function testImageBmp(): void
     {
         // test body
-        $resource = imagecreatefrombmp(__DIR__ . '/Data/test.bmp');
+        $resource = imagecreatefrombmp(__DIR__ . '/../Data/test.bmp');
         Layer::imageBmp($resource, './dst');
 
         // assertions
 
-        $origin = imagecreatefromstring(file_get_contents(__DIR__ . '/Data/test.bmp'));
+        $origin = imagecreatefromstring(file_get_contents(__DIR__ . '/../Data/test.bmp'));
         $stream = fopen('php://memory', 'r+');
         imagebmp($origin, $stream);
         rewind($stream);

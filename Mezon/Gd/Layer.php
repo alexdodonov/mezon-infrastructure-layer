@@ -67,7 +67,7 @@ class Layer
             self::$savedImages[$filePath] = stream_get_contents($stream);
         }
     }
-    
+
     /**
      * Method stores image into file
      *
@@ -89,7 +89,7 @@ class Layer
             self::$savedImages[$filePath] = stream_get_contents($stream);
         }
     }
-    
+
     /**
      * Method stores image into file
      *
@@ -111,7 +111,7 @@ class Layer
             self::$savedImages[$filePath] = stream_get_contents($stream);
         }
     }
-    
+
     /**
      * Method stores image into file
      *
@@ -133,7 +133,7 @@ class Layer
             self::$savedImages[$filePath] = stream_get_contents($stream);
         }
     }
-    
+
     /**
      * Method stores image into file
      *
@@ -153,6 +153,98 @@ class Layer
             imagewebp($resource, $stream);
             rewind($stream);
             self::$savedImages[$filePath] = stream_get_contents($stream);
+        }
+    }
+
+    /**
+     * Data for creating images from file
+     *
+     * @var string[]
+     */
+    public static $imagesCreateFromFile = [];
+
+    /**
+     * Creating image from file
+     *
+     * @param string $filePath path to the file
+     * @return false|resource created image
+     */
+    public static function imageCreateFromJpeg(string $filePath)
+    {
+        if (Conf::getConfigValueAsString('gd/layer', 'real') === 'real') {
+            // @codeCoverageIgnoreStart
+            return imagecreatefromjpeg($filePath);
+            // @codeCoverageIgnoreEnd
+        } else {
+            return imagecreatefromstring(self::$imagesCreateFromFile[$filePath]);
+        }
+    }
+
+    /**
+     * Creating image from file
+     *
+     * @param string $filePath path to the file
+     * @return false|resource created image
+     */
+    public static function imageCreateFromPng(string $filePath)
+    {
+        if (Conf::getConfigValueAsString('gd/layer', 'real') === 'real') {
+            // @codeCoverageIgnoreStart
+            return imagecreatefrompng($filePath);
+            // @codeCoverageIgnoreEnd
+        } else {
+            return imagecreatefromstring(self::$imagesCreateFromFile[$filePath]);
+        }
+    }
+    
+    /**
+     * Creating image from file
+     *
+     * @param string $filePath path to the file
+     * @return false|resource created image
+     */
+    public static function imageCreateFromGif(string $filePath)
+    {
+        if (Conf::getConfigValueAsString('gd/layer', 'real') === 'real') {
+            // @codeCoverageIgnoreStart
+            return imagecreatefromgif($filePath);
+            // @codeCoverageIgnoreEnd
+        } else {
+            return imagecreatefromstring(self::$imagesCreateFromFile[$filePath]);
+        }
+    }
+    
+    /**
+     * Creating image from file
+     *
+     * @param string $filePath path to the file
+     * @return false|resource created image
+     */
+    public static function imageCreateFromBmp(string $filePath)
+    {
+        if (Conf::getConfigValueAsString('gd/layer', 'real') === 'real') {
+            // @codeCoverageIgnoreStart
+            return imagecreatefrombmp($filePath);
+            // @codeCoverageIgnoreEnd
+        } else {
+            return imagecreatefromstring(self::$imagesCreateFromFile[$filePath]);
+        }
+    }
+    
+    /**
+     * Creating image from file
+     *
+     * @param string $filePath path to the file
+     * @return false|resource created image
+     */
+    public static function imageCreateFromWebp(string $filePath)
+    {
+        if (Conf::getConfigValueAsString('gd/layer', 'real') === 'real') {
+            // @codeCoverageIgnoreStart
+            return imagecreatefromwebp($filePath);
+            // @codeCoverageIgnoreEnd
+        } else {
+            return imagecreatefromstring(self::$imagesCreateFromFile[$filePath]);
         }
     }
 }
