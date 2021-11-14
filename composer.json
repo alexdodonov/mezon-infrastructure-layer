@@ -17,7 +17,7 @@
 	},
 	"require": {
 		"php": ">=7.2.0",
-		"mezon/conf": "1.1.*"
+		"mezon/conf": "1.2.*"
 	},
 	"support": {
 		"email": "alexey@dodonov.pro",
