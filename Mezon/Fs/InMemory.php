@@ -29,7 +29,7 @@ class InMemory
      */
     public static function fileGetContents(string $filePath)
     {
-        if (isset(static::$fs[$filePath])) {
+        if (static::fileExists($filePath)) {
             return static::$fs[$filePath];
         } else {
             return false;
@@ -45,7 +45,7 @@ class InMemory
      */
     public static function existingFileGetContents(string $filePath): string
     {
-        if (isset(static::$fs[$filePath])) {
+        if (static::fileExists($filePath)) {
             return static::$fs[$filePath];
         } else {
             throw (new \Exception('File ' . $filePath . ' does not exists', - 1));
@@ -76,7 +76,7 @@ class InMemory
         if ($flags < 0) {
             throw (new \Exception('Undefined flags : ' . $flags, - 1));
         } elseif ($flags & FILE_APPEND) {
-            if (! isset(static::$fs[$filePath])) {
+            if (! static::fileExists($filePath)) {
                 static::$fs[$filePath] = '';
             }
 
@@ -103,5 +103,17 @@ class InMemory
         } else {
             throw (new \Exception('File ' . $filePath . ' was not found', - 1));
         }
+    }
+
+    /**
+     * Checking that the file exist
+     *
+     * @param string $filePath
+     *            path to the checking file
+     * @return bool true if the file esxists, false otherwise
+     */
+    public static function fileExists(string $filePath): bool
+    {
+        return isset(static::$fs[$filePath]);
     }
 }

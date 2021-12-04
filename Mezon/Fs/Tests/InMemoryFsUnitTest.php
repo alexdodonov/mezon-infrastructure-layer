@@ -96,4 +96,18 @@ class InMemoryFsUnitTest extends TestCase
         // test body
         InMemory::existingFileGetContents('./unexisting');
     }
+
+    /**
+     * Testing method fileExists
+     */
+    public function testFileExists(): void
+    {
+        // setup
+        InMemory::clearFs();
+        InMemory::filePutContents('existing-path', '');
+
+        // test body and assertions
+        $this->assertTrue(InMemory::fileExists('existing-path'));
+        $this->assertFalse(InMemory::fileExists('unexisting-path'));
+    }
 }
