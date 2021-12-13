@@ -12,7 +12,7 @@ use Mezon\Fs\InMemory;
  */
 class GifUnitTest extends TestCase
 {
-    
+
     /**
      * Testing method imageCreateFromGif
      */

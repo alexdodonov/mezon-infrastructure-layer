@@ -33,9 +33,9 @@ class Layer
             $image = imagecreatefromstring(InMemory::existingFileGetContents($filePath));
 
             $mime = (new \finfo(FILEINFO_MIME_TYPE))->buffer(InMemory::existingFileGetContents($filePath));
-            
+
             $mime = $mime === 'image/x-ms-bmp' ? 'image/bmp' : $mime;
-            
+
             return [
                 0 => imagesx($image),
                 1 => imagesy($image),
