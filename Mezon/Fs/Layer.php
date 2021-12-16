@@ -60,13 +60,11 @@ class Layer
             return file_exists($dirPath);
             // @codeCoverageIgnoreEnd
         } else {
-            self::$createdDirectories = array_reverse(self::$createdDirectories);
-
-            $result = array_pop(self::$createdDirectories);
-
-            self::$createdDirectories = array_reverse(self::$createdDirectories);
-
-            return $result;
+            foreach (self::$createdDirectories as $i => $item)
+                if ($item['path'] === $dirPath)
+                    $result = self::$createdDirectories[$i];
+                    unset(self::$createdDirectories[$i]);
+                    return $result;
         }
     }
 
