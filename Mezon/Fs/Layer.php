@@ -60,11 +60,13 @@ class Layer
             return file_exists($dirPath);
             // @codeCoverageIgnoreEnd
         } else {
-            foreach (self::$createdDirectories as $i => $item)
-                if ($item['path'] === $dirPath)
-                    $result = self::$createdDirectories[$i];
-                    unset(self::$createdDirectories[$i]);
-                    return $result;
+            foreach (self::$createdDirectories as $item) {
+                if ($item['path'] === $dirPath) {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 
