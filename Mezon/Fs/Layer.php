@@ -44,7 +44,7 @@ class Layer
      *
      * @var array[]
      */
-    private static $createdDirectories = [];
+    public static $createdDirectories = [];
 
     /**
      * Checking if the directory exists
