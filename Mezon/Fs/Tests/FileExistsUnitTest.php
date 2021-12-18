@@ -19,15 +19,12 @@ class FileExistsUnitTest extends TestCase
     {
         // setup
         Conf::setConfigValue('fs/layer', 'mock');
-        Layer::$fileExisting = [
-            true,
-            false,
-            true
+        Layer::$existingFiles = [
+            'path-true'
         ];
 
         // test body and assertions
         $this->assertTrue(Layer::fileExists('path-true'));
         $this->assertFalse(Layer::fileExists('path-false'));
-        $this->assertTrue(Layer::fileExists('path-true'));
     }
 }

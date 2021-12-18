@@ -12,7 +12,6 @@ use Mezon\Conf\Conf;
  * @version v.1.0 (2021/11/13)
  * @copyright Copyright (c) 2021, aeon.org
  */
-
 class Layer
 {
 
@@ -123,11 +122,11 @@ class Layer
     }
 
     /**
-     * Returns for fileExists method
+     * List of existring files
      *
-     * @var bool[]
+     * @var string[]
      */
-    public static $fileExisting = [];
+    public static $existingFiles = [];
 
     /**
      * Checking if the file exists
@@ -143,13 +142,7 @@ class Layer
             return file_exists($filePath);
             // @codeCoverageIgnoreEnd
         } else {
-            self::$fileExisting = array_reverse(self::$fileExisting);
-
-            $result = array_pop(self::$fileExisting);
-
-            self::$fileExisting = array_reverse(self::$fileExisting);
-
-            return $result;
+            return in_array($filePath, static::$existingFiles);
         }
     }
 
