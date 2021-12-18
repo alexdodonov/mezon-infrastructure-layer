@@ -47,6 +47,30 @@ class Layer
     private static $createdDirectories = [];
 
     /**
+     * Checking if the directory exists
+     *
+     * @param string $dirPath
+     *            path to the checking directory
+     * @return bool true if the directory exists, false otherwise
+     */
+    public static function directoryExists(string $dirPath): bool
+    {
+        if (Conf::getConfigValueAsString('fs/layer', 'real') === 'real') {
+            // @codeCoverageIgnoreStart
+            return file_exists($dirPath);
+            // @codeCoverageIgnoreEnd
+        } else {
+            foreach (self::$createdDirectories as $item) {
+                if ($item['path'] === $dirPath) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+
+    /**
      * Method clears info about the created directories
      */
     public static function clearCreatedDirectoriesInfo(): void

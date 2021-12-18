@@ -22,10 +22,10 @@ class Layer
      * @var boolean
      */
     public static $redirectWasPerformed = false;
-    
+
     /**
      * Last redirection URL
-     * 
+     *
      * @var string
      */
     public static $lastRedirectionUrl = '';
@@ -36,7 +36,7 @@ class Layer
     public static function redirectTo(string $url): void
     {
         self::$lastRedirectionUrl = $url;
-        
+
         if (Conf::getConfigValueAsString('redirect/layer', 'real') === 'real') {
             // @codeCoverageIgnoreStart
             header("Location: $url");

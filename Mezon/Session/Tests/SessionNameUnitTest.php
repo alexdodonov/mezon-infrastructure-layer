@@ -29,10 +29,10 @@ class SessionNameUnitTest extends TestCase
     {
         // setup
         Layer::sessionWriteClose();
-        
+
         // test body
         $result = Layer::sessionName();
-        
+
         // assertions
         $this->assertEquals('session-name', $result);
     }
