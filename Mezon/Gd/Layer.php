@@ -23,11 +23,13 @@ class Layer
      *            path to the image size
      * @param array $imageInfo
      *            image info
-     * @return array image sizes
+     * @return array{0: int, 1: int, mime: string} image sizes
+     * @psalm-suppress MixedReturnTypeCoercion
      */
     public static function getImageSize(string $filePath, array &$imageInfo = null): array
     {
         if (Conf::getConfigValueAsString('gd/layer', 'real') === 'real') {
+            // TODO handle case when getimagesize returns error
             return getimagesize($filePath, $imageInfo);
         } else {
             $image = imagecreatefromstring(InMemory::existingFileGetContents($filePath));
