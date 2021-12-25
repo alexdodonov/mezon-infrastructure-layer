@@ -14,7 +14,7 @@ class FileGetContentsUnitTest extends TestCase
 {
 
     /**
-     * Testing method
+     * Testing method fileGetContents
      */
     public function testFileGetContents(): void
     {

@@ -163,4 +163,20 @@ class Layer
             return InMemory::fileGetContents($filePath);
         }
     }
+
+    /**
+     * Reading existing file from disc
+     *
+     * @param string $filePath
+     *            path to the file to be read
+     * @return string read data or false in case of error
+     */
+    public static function existingFileGetContents(string $filePath): string
+    {
+        if (InMemory::fileExists($filePath)) {
+            return InMemory::existingFileGetContents($filePath);
+        } else {
+            throw (new \Exception('File ' . $filePath . ' does not exists', - 1));
+        }
+    }
 }
