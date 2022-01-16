@@ -5,13 +5,13 @@ use Mezon\Conf\Conf;
 use Mezon\Fs\InMemory;
 
 /**
- * Configuration routines
+ * GD abstractions
  *
  * @package InfrastructureLayer
  * @subpackage Gd
  * @author Dodonov A.A.
  * @version v.1.0 (2021/11/13)
- * @copyright Copyright (c) 2021, aeon.org
+ * @copyright Copyright (c) 2021, aeon.su
  */
 class Layer
 {

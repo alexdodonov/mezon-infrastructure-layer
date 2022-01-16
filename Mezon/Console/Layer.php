@@ -10,7 +10,7 @@ use Mezon\Conf\Conf;
  * @subpackage Console
  * @author Dodonov A.A.
  * @version v.1.0 (2021/12/17)
- * @copyright Copyright (c) 2021, aeon.org
+ * @copyright Copyright (c) 2021, aeon.su
  */
 class Layer
 {
