@@ -11,7 +11,7 @@ use function Safe\getallheaders;
  * @subpackage Headers
  * @author Dodonov A.A.
  * @version v.1.0 (2022/01/16)
- * @copyright Copyright (c) 2022, aeon.su
+ * @copyright Copyright (c) 2022, http://aeon.su
  */
 class Layer
 {
