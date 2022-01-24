@@ -33,7 +33,7 @@ class Layer
     {
         if (Conf::getConfigValueAsString('headers/layer', 'real') === 'real') {
             // @codeCoverageIgnoreStart
-            return getallheaders();
+            return \getallheaders();
             // @codeCoverageIgnoreEnd
         } else {
             return self::$headers;
