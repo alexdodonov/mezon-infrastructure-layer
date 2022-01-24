@@ -19,14 +19,15 @@ class Layer
     /**
      * Request headers
      *
-     * @var array
+     * @var string[]
      */
     private static $headers = [];
 
     /**
      * Method returns list of headers
      *
-     * @return array list of headers
+     * @return string[] list of headers
+     * @psalm-suppress MixedReturnTypeCoercion
      */
     public static function getAllHeaders(): array
     {
@@ -42,7 +43,7 @@ class Layer
     /**
      * Method sets headers for testing purposes
      *
-     * @param array $headers
+     * @param string[] $headers
      *            headers
      */
     public static function setAllHeaders(array $headers): void
