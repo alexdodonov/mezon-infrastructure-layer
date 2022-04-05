@@ -12,7 +12,6 @@ use Mezon\Conf\Conf;
  * @version v.1.0 (2021/11/13)
  * @copyright Copyright (c) 2021, http://aeon.su
  */
-
 class Layer
 {
 
@@ -45,5 +44,14 @@ class Layer
         } else {
             self::$redirectWasPerformed = true;
         }
+    }
+
+    /**
+     * Method resets variables
+     */
+    public static function clear(): void
+    {
+        static::$redirectWasPerformed = false;
+        static::$lastRedirectionUrl = '';
     }
 }

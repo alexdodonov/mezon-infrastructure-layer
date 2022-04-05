@@ -20,7 +20,7 @@
 		"@default": true,
 		"FunctionCallRemoval": {
 			"ignore": [
-				"Mezon\\Redirect\\Layer::redirectTo::42",
+				"Mezon\\Redirect\\Layer::redirectTo::41",
 				"Mezon\\Gd\\Layer::imageJpeg::61",
 				"Mezon\\Gd\\Layer::imagePng::83",
 				"Mezon\\Gd\\Layer::imageGif::105",
@@ -30,12 +30,12 @@
 		},
 		"DecrementInteger": {
 			"ignore": [
-				"Mezon\\Redirect\\Layer::redirectTo::43"
+				"Mezon\\Redirect\\Layer::redirectTo::42"
 			]
 		},
 		"IncrementInteger": {
 			"ignore": [
-				"Mezon\\Redirect\\Layer::redirectTo::43"
+				"Mezon\\Redirect\\Layer::redirectTo::42"
 			]
 		}
 	}

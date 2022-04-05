@@ -20,8 +20,7 @@ class RedirectToUnitTest extends TestCase
     protected function setUp(): void
     {
         Conf::setConfigValue('redirect/layer', 'mock');
-        Layer::$lastRedirectionUrl = '';
-        Layer::$redirectWasPerformed = false;
+        Layer::clear();
     }
 
     /**
@@ -35,5 +34,21 @@ class RedirectToUnitTest extends TestCase
         // assertions
         $this->assertEquals('url', Layer::$lastRedirectionUrl);
         $this->assertTrue(Layer::$redirectWasPerformed);
+    }
+
+    /**
+     * Testing method clear
+     */
+    public function testClear(): void
+    {
+        // setup
+        Layer::redirectTo('url');
+
+        // test body
+        Layer::clear();
+
+        // assertions
+        $this->assertEquals('', Layer::$lastRedirectionUrl);
+        $this->assertFalse(Layer::$redirectWasPerformed);
     }
 }
