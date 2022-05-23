@@ -157,6 +157,4 @@ class Layer
             return true;
         }
     }
-
-    // TODO make article for dev.to about this abstraction
 }

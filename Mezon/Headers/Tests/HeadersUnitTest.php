@@ -31,4 +31,21 @@ class HeadersUnitTest extends TestCase
         $this->assertArrayHasKey('header', $headers);
         $this->assertTrue(in_array('value', $headers));
     }
+
+    /**
+     * Testing method addHeader
+     */
+    public function testAddHeader(): void
+    {
+        // setup
+        Conf::setConfigStringValue('headers/layer', 'mock');
+        Headers\Layer::setAllHeaders([]);
+
+        // test body
+        Headers\Layer::addHeader('name', 'value');
+
+        // assertions
+        $this->assertArrayHasKey('name', Headers\Layer::getAllHeaders());
+        $this->assertTrue(in_array('value', Headers\Layer::getAllHeaders()));
+    }
 }

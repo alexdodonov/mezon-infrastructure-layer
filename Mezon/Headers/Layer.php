@@ -50,4 +50,17 @@ class Layer
     {
         self::$headers = $headers;
     }
+
+    /**
+     * Additing header to the list of headers
+     *
+     * @param string $headerName
+     *            header name
+     * @param string $headerValue
+     *            header value
+     */
+    public static function addHeader(string $headerName, string $headerValue): void
+    {
+        self::$headers[$headerName] = $headerValue;
+    }
 }

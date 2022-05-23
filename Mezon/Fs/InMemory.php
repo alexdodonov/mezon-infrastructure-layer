@@ -8,7 +8,7 @@ namespace Mezon\Fs;
  * @subpackage InMemory
  * @author Dodonov A.A.
  * @version v.1.0 (2021/11/13)
- * @copyright Copyright (c) 2021, aeon.su
+ * @copyright Copyright (c) 2021, http://aeon.su
  */
 class InMemory
 {
