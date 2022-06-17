@@ -38,7 +38,7 @@ class Layer
         } else {
             self::$readlines = array_reverse(self::$readlines);
 
-            $result = array_pop(self::$readlines);
+            $result = array_pop(self::$readlines);// TODO use array_shift
 
             self::$readlines = array_reverse(self::$readlines);
 

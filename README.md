@@ -22,7 +22,7 @@ Let's see some real code examples:
 
 ```php
 // here we setup mock calls
-\Mezon\Conf\Conf::setConfigValueAsString('fs/layer', 'mock');
+\Mezon\Conf\Conf::setConfigStringValue('fs/layer', 'mock');
 
 // here we setup that mock will return true if the we check that this directory exists
 \Mezon\Fs\Layer::$createdDirectories[] = [
@@ -46,7 +46,7 @@ Class `Mezon\Console\Layer` provides abstractions for working winth console
 
 ```php
 // here we setup mock calls
-Conf::setConfigValueAsString('console/layer', 'mock');
+Conf::setConfigStringValue('console/layer', 'mock');
 
 // setup values wich will be returned by the method Mezon\Console\Layer::readline()
 \Mezon\Console\Layer::$readlines[] = 'line 1';
@@ -59,7 +59,7 @@ echo \Mezon\Console\Layer::readline(); // ouputs 'line 1'
 echo \Mezon\Console\Layer::readline(); // ouputs 'line 2'
 
 // here we setup native php methods calls
-Conf::setConfigValueAsString('console/layer', 'real');
+Conf::setConfigStringValue('console/layer', 'real');
 echo \Mezon\Console\Layer::readline(); // outputs string wich you will input in the console
 // because in this line real method `readline` will be called
 ```
@@ -70,7 +70,7 @@ This package also have abstractions for file systems routine:
 
 ```php
 // here we setup mock calls
-Conf::setConfigValueAsString('fs/layer', 'mock');
+Conf::setConfigStringValue('fs/layer', 'mock');
 
 // writing file
 \Mezon\Fs\Layer::filePutContents('file-path', 'data', FILE_APPEND);
@@ -119,7 +119,7 @@ echo \Mezon\Fs\InMemory::fileExists('unexisting-file'); // outputs 'false'
 We also have mocks for some GD functions. Basically for those ones wich work with file system.
 
 ```php
-Conf::setConfigValueAsString('gd/layer', 'mock');
+Conf::setConfigStringValue('gd/layer', 'mock');
 // here we are trying to get file with this path from \Mezon\FS\InMemory
 var_dump(\Mezon\GD\Layer::getImageSize('path-to-image'));
 
@@ -143,7 +143,7 @@ $resource = \Mezon\GD\Layer::imageCreateFromWebp('path-to-image-file');
 You can work with headers. Two methods for these purposes are provided:
 
 ```php
-Conf::setConfigValueAsString('headers/layer', 'mock');
+Conf::setConfigStringValue('headers/layer', 'mock');
 
 // setting headers wich will be returned by the mock
 \Mezon\Headers\Layer::setAllHeaders([
@@ -160,7 +160,7 @@ var_dump(\Mezon\Headers\Layer::getAllHeaders());
 You can mock redirects:
 
 ```php
-Conf::setConfigValueAsString('redirect/layer', 'mock');
+Conf::setConfigStringValue('redirect/layer', 'mock');
 
 // in real mode this call method header('Location: ...') will be called
 // in mock mode no redirection will be performed and redirect URL will be stored
@@ -174,7 +174,7 @@ Conf::setConfigValueAsString('redirect/layer', 'mock');
 You can also mock session methods:
 
 ```php
-Conf::setConfigValueAsString('session/layer', 'mock');
+Conf::setConfigStringValue('session/layer', 'mock');
 
 // method returns 'session-name' if it is used as mock mode
 // and return result of session_name() if it is used in real model
@@ -189,10 +189,22 @@ Conf::setConfigValueAsString('session/layer', 'mock');
         string $domain = "",
         bool $secure = false,
         bool $httponly = false);
-        
+
 // getting session id or setting it
 \Mezon\Session\Layer::sessionId(string $id = ''): string;
 
 // saving session data and closing session
 \Mezon\Session\Layer::sessionWriteClose();
+```
+
+## System methods mocks
+
+You can also mock some system methods calls. Like `die` for example:
+
+```php
+Conf::setConfigStringValue('system/layer', 'mock');
+
+// in mock mode field $dieWasCalled will be set to 'true'
+// in real mode built-in PHP method 'die' will be called
+\Mezon\System\Layer::die();
 ```
