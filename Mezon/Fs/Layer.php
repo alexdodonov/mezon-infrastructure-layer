@@ -142,6 +142,7 @@ class Layer
             return file_exists($filePath);
             // @codeCoverageIgnoreEnd
         } else {
+            // TODO use InMemory::fileExists, надо попробовать сделать так чтобы не надо было поднимать мажорную версию
             return in_array($filePath, static::$existingFiles);
         }
     }
@@ -173,10 +174,20 @@ class Layer
      */
     public static function existingFileGetContents(string $filePath): string
     {
-        if (InMemory::fileExists($filePath)) {
-            return InMemory::existingFileGetContents($filePath);
+        if (Conf::getConfigValueAsString('fs/layer', 'real') === 'real') {
+            $result = self::fileGetContents($filePath);
+
+            if (is_string($result)) {
+                return $result;
+            } else {
+                throw (new \Exception('File ' . $filePath . ' does not exists', - 1));
+            }
         } else {
-            throw (new \Exception('File ' . $filePath . ' does not exists', - 1));
+            if (InMemory::fileExists($filePath)) {
+                return InMemory::existingFileGetContents($filePath);
+            } else {
+                throw (new \Exception('File ' . $filePath . ' does not exists', - 1));
+            }
         }
     }
 }
