@@ -28,7 +28,7 @@ class GetImageSizeUnitTest extends TestCase
      *
      * @return array testing data
      */
-    public function getImageSizeDataProvider(): array
+    public static function getImageSizeDataProvider(): array
     {
         return [
             // #0
